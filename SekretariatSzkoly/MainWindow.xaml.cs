@@ -162,5 +162,64 @@ namespace SekretariatSzkoly
         int q = 13;
         rabinKarp(pattern, text, q);
     }
+    class Program
+    {
+        static void Main()
+        {
+            const string input1 = "There were ABCD Perls";
+            const string input2 = "ABCD string";
+            const string input3 = "No ABC dee string";
+            const string input4 = "Test BAC";
+
+            Console.WriteLine(Contains1(input1));
+            Console.WriteLine(Contains1(input2));
+            Console.WriteLine(Contains1(input3));
+            Console.WriteLine(Contains1(input4));
+
+            Console.WriteLine(Contains2(input1));
+            Console.WriteLine(Contains2(input2));
+            Console.WriteLine(Contains2(input3));
+            Console.WriteLine(Contains2(input4));
+        }
+
+        static bool Contains1(string value)
+        {
+            int i = 3; 
+            int length = value.Length;
+            while (i < length)
+            {
+                switch (value[i])
+                {
+                    case 'D':
+                        if (value[i - 1] == 'C' &&
+                        value[i - 2] == 'B' &&
+                        value[i - 3] == 'A')
+                        {
+                            return true;
+                        }
+                        i += 4;
+                        continue;
+                    case 'C':
+                        i += 1;
+                        continue;
+                    case 'B':
+                        i += 2;
+                        continue;
+                    case 'A':
+                        i += 3;
+                        continue;
+                    default:
+                        i += 4;
+                        continue;
+                }
+            }
+            return false;
+        }
+
+        static bool Contains2(string value)
+        {
+            return value.IndexOf("ABCD", StringComparison.Ordinal) != -1;
+        }
+    }
 }
 
